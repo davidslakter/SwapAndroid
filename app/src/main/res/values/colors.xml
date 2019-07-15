@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#1fc5ce</color>
+    <color name="colorPrimaryDark">#17afb7</color>
+    <color name="colorAccent">#1fc5ce</color>
+
+    <color name="colorVividCyan">#02E6E9</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorHint">#1fc5ce</color>
+    <color name="colorPaleTurquoise">#A5F6F9</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorGray">#7e7e7e</color>
+    <color name="colorMediumGray">#b9b7b7</color>
+    <color name="colorLightGray">#d3d3d3</color>
+    <color name="colorLightGraySetting">#EFEFF4</color>
+    <color name="colorLightestGray">#e0e0e0</color>
+
+    <color name="colorTurquoiseBlue">#3cd1f4</color>
+    <!--Custom tab colors-->
+    <color name="tabMedium">#2B2B2B</color>
+    <color name="tabDark">#000000</color>
+    <color name="tabTransparent">#10ffffff</color>
+    <color name="tab_border">#a7a7aa</color>
+    <color name="tab_background">#f6f6f7</color>
+    <color name="colorBlue">#007AFF</color>
+
+    <color name="colorRed">#FF0000</color>
+    <color name="colorGreen">#00FF00</color>
+    <color name="colorForProfileBackground">#17afb7</color>
+</resources>

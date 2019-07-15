@@ -1,0 +1,68 @@
+package com.swap.adapters;
+
+import android.content.Context;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+
+import com.swap.views.fragments.SwapTutorialPageEightFragment;
+import com.swap.views.fragments.SwapTutorialPageFiveFragment;
+import com.swap.views.fragments.SwapTutorialPageFourFragment;
+import com.swap.views.fragments.SwapTutorialPageNineFragment;
+import com.swap.views.fragments.SwapTutorialPageOneFragment;
+import com.swap.views.fragments.SwapTutorialPageSevenFragment;
+import com.swap.views.fragments.SwapTutorialPageSixFragment;
+import com.swap.views.fragments.SwapTutorialPageTenFragment;
+import com.swap.views.fragments.SwapTutorialPageThreeFragment;
+import com.swap.views.fragments.SwapTutorialPageTwoFragment;
+
+
+public class SwapTutorialAdapter extends FragmentStatePagerAdapter {
+
+    private static final int numberOfPages = 10;
+    String[] sliderImageArray;
+    Context context;
+
+    public SwapTutorialAdapter(FragmentManager fm, String[] sliderImageArray, Context context) {
+        super(fm);
+        this.sliderImageArray = sliderImageArray;
+    }
+
+    @Override
+    public Fragment getItem(int position) {
+        Fragment fragment = null;
+        if (position == 0)
+            fragment = new SwapTutorialPageOneFragment();
+        else if (position == 1)
+            fragment = new SwapTutorialPageTwoFragment();
+        else if (position == 2)
+            fragment = new SwapTutorialPageThreeFragment();
+        else if (position == 3)
+            fragment = new SwapTutorialPageFourFragment();
+        else if (position == 4)
+            fragment = new SwapTutorialPageFiveFragment();
+        else if (position == 5)
+            fragment = new SwapTutorialPageSixFragment();
+        else if (position == 6)
+            fragment = new SwapTutorialPageSevenFragment();
+        else if (position == 7)
+            fragment = new SwapTutorialPageEightFragment();
+        else if (position == 8)
+            fragment = new SwapTutorialPageNineFragment();
+        else if (position == 9)
+            fragment = new SwapTutorialPageTenFragment();
+
+        return fragment;
+    }
+
+    @Override
+    public int getCount() {
+        return numberOfPages;
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
+    }
+
+}

@@ -1,0 +1,41 @@
+package com.swap.views.fragments;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.swap.R;
+import com.swap.utilities.Utils;
+
+
+public class SwapTutorialPageSixFragment extends Fragment {
+
+    private TextView textViewSwap;
+    private TextView textViewInteractWithDifferent;
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_swap_tutorial_page_six, container, false);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        textViewSwap = (TextView) view.findViewById(R.id.textViewSwap);
+        textViewInteractWithDifferent = (TextView) view.findViewById(R.id.textViewInteractWithDifferent);
+        setFontOnViews();
+    }
+
+    private void setFontOnViews() {
+        textViewSwap.setTypeface(Utils.setFont(getActivity(), "lantinghei.ttf"));
+        textViewInteractWithDifferent.setTypeface(Utils.setFont(getActivity(), "lantinghei.ttf"));
+    }
+
+}

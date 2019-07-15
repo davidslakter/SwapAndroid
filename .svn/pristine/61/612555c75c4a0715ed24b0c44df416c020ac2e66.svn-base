@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:focusable="false"
+                android:focusableInTouchMode="true">
+
+    <FrameLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_height="wrap_content">
+
+        <com.swap.utilities.RoundedImageView
+            android:id="@+id/imageViewUser"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignStart="@+id/tvEditBio"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/profile_picture_default_icon"/>
+
+        <ImageView
+            android:id="@+id/imgViewVerified"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_gravity="right|center"
+            android:layout_marginBottom="15dp"
+            android:background="@drawable/verified_tickmark"
+            />
+    </FrameLayout>
+
+    <RelativeLayout
+        android:id="@+id/rlCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_toEndOf="@+id/frameLayout"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvPointsCount"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvPointLable"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvPointsCount"
+            android:gravity="center"
+            android:text="@string/points"/>
+
+        <TextView
+            android:id="@+id/tvSwapsCount"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/tvPointsCount"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvSwapsLable"
+            android:layout_width="45dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvSwapsCount"
+            android:layout_toRightOf="@+id/tvPointsCount"
+            android:gravity="center"
+            android:text="@string/swaps"/>
+
+        <TextView
+            android:id="@+id/tvSwappedCount"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tvSwapsCount"
+            android:gravity="center"
+            android:text="0"
+            android:textColor="#000"
+            android:textSize="16sp"
+            android:textStyle="bold"/>
+
+        <TextView
+            android:id="@+id/tvSwappedLable"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvSwappedCount"
+            android:layout_toRightOf="@+id/tvSwapsCount"
+            android:gravity="center"
+            android:maxLines="1"
+            android:text="@string/swapped"/>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/viewSeperator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/rlCount"
+        android:layout_marginLeft="@dimen/seperator_margin_left"
+        android:layout_marginRight="@dimen/seperator_margin_right"
+        android:layout_marginTop="5dp"
+        android:layout_toRightOf="@+id/frameLayout"
+        android:background="@color/colorPrimary"/>
+
+    <TextView
+        android:id="@+id/tvUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/frameLayout"
+        android:layout_marginTop="5dp"
+        android:paddingLeft="10dp"
+        android:text="User Name"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/tvEditBio"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvUsername"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="3dp"
+        android:background="@android:color/transparent"
+        android:cursorVisible="false"
+        android:hint="@string/tap_to_edit_bio"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:maxLength="80"
+        android:maxLines="1"
+        android:textSize="12sp"/>
+
+    <ImageView
+        android:id="@+id/imageViewTutorial"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_alignEnd="@+id/viewSeperator"
+        android:layout_below="@+id/tvEditBio"
+        android:layout_marginEnd="27dp"
+        android:background="@drawable/tutorial"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvEditBio"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/imageViewQr"
+            android:layout_width="@dimen/qr_code_width"
+            android:layout_height="@dimen/qr_code_height"
+            android:layout_marginTop="0dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imageViewQr"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="7dp"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageViewRedit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="3dp"
+                    android:src="@drawable/redit_black"/>
+
+                <ImageView
+                    android:id="@+id/imageViewSpotify"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_toRightOf="@+id/imageViewRedit"
+                    android:src="@drawable/spotify_black"/>
+
+                <ImageView
+                    android:id="@+id/imageViewCall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_toRightOf="@+id/imageViewSpotify"
+                    android:src="@drawable/phone_black"/>
+
+                <ImageView
+                    android:id="@+id/imageViewEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_toRightOf="@+id/imageViewCall"
+                    android:src="@drawable/email_black"/>
+
+                <ImageView
+                    android:id="@+id/imageViewInstagram"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_toRightOf="@+id/imageViewEmail"
+                    android:src="@drawable/instagram_black"/>
+
+                <ImageView
+                    android:id="@+id/imageViewGithub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_toRightOf="@+id/imageViewInstagram"
+                    android:src="@drawable/github_black"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imageViewGithub"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageViewVimeo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/vimeo_black"/>
+
+                <ImageView
+                    android:id="@+id/imageViewTwitter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/twitter_black"/>
+
+                <ImageView
+                    android:id="@+id/imageViewYoutube"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:src="@drawable/youtube_black"/>
+
+                <ImageView
+                    android:id="@+id/imageViewSoundCloud"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:src="@drawable/soundcloud_black"/>
+
+                <ImageView
+                    android:id="@+id/imageViewPinterest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:src="@drawable/pinterest_black"/>
+
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

@@ -1,0 +1,111 @@
+package com.swap.utilities;
+
+import android.accounts.Account;
+import android.content.Context;
+
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.googleapis.json.GoogleJsonResponseException;
+import com.google.api.services.youtube.YouTube;
+import com.google.api.services.youtube.model.ResourceId;
+import com.google.api.services.youtube.model.Subscription;
+import com.google.api.services.youtube.model.SubscriptionSnippet;
+import com.google.common.collect.Lists;
+import com.swap.views.activities.ConnectSocialMediaActivity;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.List;
+
+/**
+ * Created by anjali on 14-09-2017.
+ */
+
+public class AddSubscription {
+    /**
+     * Define a global instance of a Youtube object, which will be used
+     * to make YouTube Data API requests.
+     */
+    private static YouTube youtube;
+
+    public static String main(String youtube_id, Context context) {
+
+        // This OAuth 2.0 access scope allows for full read/write access to the
+        // authenticated user's account.
+        List<String> scopes = Lists.newArrayList("https://www.googleapis.com/auth/youtube");
+
+        try {
+            SocialMediaUtil.mCredential = SocialMediaUtil.youtubeInitialization(context);
+            SocialMediaUtil.mCredential.setSelectedAccount(new Account(Preferences.get(context, Preferences.YOUTUBE_ACCOUNT_NAME), "com.swap"));
+
+            // Authorize the request.
+            // Credential credential = Auth.authorize(scopes, "addsubscription",context);
+
+            // This object is used to make YouTube Data API requests.
+            youtube = new YouTube.Builder(Auth.HTTP_TRANSPORT, Auth.JSON_FACTORY, SocialMediaUtil.mCredential).setApplicationName(
+                    "Swap").build();
+            // We get the user selected channel to subscribe.
+            // Retrieve the channel ID that the user is subscribing to.
+            //String channelId = getChannelId(youtube_id);
+            // String channelId = "UCtVd0c0tGXuTSbU5d8cSBUg";
+            String channelId = youtube_id;
+            System.out.println("You chose " + channelId + " to subscribe.");
+
+            // Create a resourceId that identifies the channel ID.
+
+                HashMap<String, String> parameters = new HashMap<>();
+                parameters.put("part", "snippet");
+
+
+                Subscription subscription = new Subscription();
+                SubscriptionSnippet snippet = new SubscriptionSnippet();
+                ResourceId resourceId = new ResourceId();
+                resourceId.set("channelId", channelId);
+                resourceId.set("kind", "youtube#channel");
+
+                snippet.setResourceId(resourceId);
+                subscription.setSnippet(snippet);
+
+                YouTube.Subscriptions.Insert subscriptionsInsertRequest = youtube.subscriptions().insert(parameters.get("part").toString(), subscription);
+
+                Subscription response = subscriptionsInsertRequest.execute();
+                System.out.println(response);
+
+
+            return response.getId();
+        } catch (GoogleJsonResponseException e) {
+            System.err.println("GoogleJsonResponseException code: " + e.getDetails().getCode() + " : "
+                    + e.getDetails().getMessage());
+            e.printStackTrace();
+            return "";
+        } catch (IOException e) {
+            System.err.println("IOException: " + e.getMessage());
+            e.printStackTrace();
+            return "";
+        } catch (Throwable t) {
+            System.err.println("Throwable: " + t.getMessage());
+            t.printStackTrace();
+            return "";
+        }
+    }
+
+    /*
+     * Prompt the user to enter a channel ID and return it.
+     */
+    private static String getChannelId(String youtube_id) throws IOException {
+
+        String channelId = "";
+
+        System.out.print("Please enter a channel id: ");
+        BufferedReader bReader = new BufferedReader(new InputStreamReader(System.in));
+        channelId = bReader.readLine();
+
+        if (channelId.length() < 1) {
+            // If nothing is entered, defaults to "YouTube For Developers."
+           //channelId = "UCtVd0c0tGXuTSbU5d8cSBUg";
+            channelId = youtube_id;
+        }
+        return channelId;
+    }
+}

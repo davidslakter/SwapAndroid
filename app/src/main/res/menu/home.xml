@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/action_right_icon"
+        android:title="Text to be seen by user"
+        app:showAsAction="ifRoom"
+        android:icon="@drawable/ic_action_share_icon"
+        android:orderInCategory="50"/>
+
+    <item
+        android:id="@+id/action_right_Text"
+        app:showAsAction="ifRoom"
+        android:title="Done"
+        android:visible="false"
+        android:orderInCategory="50"/>
+</menu>

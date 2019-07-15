@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorVividCyan"
+    tools:context="com.swap.views.activities.SignUpDOBActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="40dp"
+        android:layout_marginRight="40dp"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:id="@+id/textViewWhenYourBirthday"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:gravity="center_horizontal"
+            android:text="@string/whenYourBirthday"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/textViewWillNotBeSwapWithoutPermission"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:gravity="center_horizontal"
+            android:text="@string/willNotBeSwappedWithoutPermission"
+            android:textColor="@color/colorWhite"
+            android:textSize="11sp" />
+
+        <EditText
+            android:id="@+id/editTextDOB"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="30dp"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
+            android:cursorVisible="false"
+            android:background="@drawable/background_white"
+            android:hint="@string/selectDate"
+            android:gravity="center"
+            android:textColor="@color/colorVividCyan"
+            android:inputType="date"
+            android:textSize="14sp" />
+
+      <!--  <com.github.florent37.singledateandtimepicker.SingleDateAndTimePicker
+            android:id="@+id/singleDayPicker"
+            android:layout_width="match_parent"
+            android:layout_height="230dp"
+            android:layout_marginTop="30dp"
+            android:textAlignment="center"
+            app:picker_curved="false"
+            app:picker_cyclic="true"
+            app:picker_mustBeOnFuture="true"
+            app:picker_selectedTextColor="@color/colorWhite"
+            app:picker_textColor="@color/colorWhite"
+            app:picker_textSize="18dp"
+            app:picker_visibleItemCount="7"/>-->
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/buttonBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="left"
+                android:text="@string/back"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp" />
+
+            <Button
+                android:id="@+id/buttonNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="right"
+                android:text="@string/next"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

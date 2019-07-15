@@ -1,0 +1,320 @@
+package com.swap.views.activities;
+
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.AsyncTask;
+import android.os.Bundle;
+import android.os.Handler;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.util.Log;
+import android.view.View;
+import android.widget.CompoundButton;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoDevice;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUser;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserDetails;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GetDetailsHandler;
+import com.swap.R;
+import com.swap.models.SwapUser;
+import com.swap.models.Users;
+import com.swap.utilities.AppHelper;
+import com.swap.utilities.Preferences;
+import com.swap.utilities.Utils;
+
+public class SettingsActivity extends AppCompatActivity implements View.OnClickListener {
+
+    TextView textViewEditProfile;
+    TextView textViewPrivacyPolicy;
+    TextView textViewConnectSocialMedia;
+    TextView textViewProfile;
+    TextView textViewAccount;
+    TextView textViewAbout;
+    TextView textViewLogout;
+    TextView textViewPrivateAccount;
+    private CognitoUser user;
+    private String username;
+    private ProgressDialog waitDialog;
+    Switch switchIsPrivate;
+    Users mUsers;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
+        findViewById();
+        inItToolBar();
+    }
+
+    private void inItToolBar() {
+        View view = findViewById(R.id.layout_toolbar);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbarView);
+        /*setSupportActionBar(toolbar);
+        if(getSupportActionBar()!=null)
+        getSupportActionBar().setDisplayShowTitleEnabled(false);*/
+
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.textViewTitle);
+        mTitle.setText(R.string.settings);
+
+        toolbar.setNavigationIcon(R.drawable.back_arrow_white);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        //Set font on view//
+        mTitle.setTypeface(Utils.setFont(this, "avenir-next-regular.ttf"));
+    }
+
+    private void findViewById() {
+        textViewEditProfile = (TextView) findViewById(R.id.textViewEditProfile);
+        textViewPrivacyPolicy = (TextView) findViewById(R.id.textViewPrivacyPolicy);
+        textViewConnectSocialMedia = (TextView) findViewById(R.id.textViewConnectSocialMedia);
+        textViewLogout = (TextView) findViewById(R.id.textViewLogout);
+        textViewProfile = (TextView) findViewById(R.id.textViewLogout);
+        textViewAccount = (TextView) findViewById(R.id.textViewLogout);
+        textViewAbout = (TextView) findViewById(R.id.textViewLogout);
+        textViewPrivateAccount = (TextView) findViewById(R.id.textViewPrivateAccount);
+        textViewConnectSocialMedia.setOnClickListener(this);
+        textViewPrivacyPolicy.setOnClickListener(this);
+        textViewEditProfile.setOnClickListener(this);
+        textViewLogout.setOnClickListener(this);
+        switchIsPrivate = (Switch) findViewById(R.id.switchIsPrivate);
+        mUsers = Utils.getUserDateFromPreferences(SettingsActivity.this, Preferences.UserDate);
+        if (mUsers != null) {
+            setUserData(mUsers);
+        }
+        switchIsPrivateCheckedChangeListener();
+        setFontOnViews();
+    }
+
+    private void setFontOnViews() {
+        textViewEditProfile.setTypeface(Utils.setFont(this,"lantinghei.ttf"));
+        textViewPrivacyPolicy.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+        textViewConnectSocialMedia.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+        textViewProfile.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+        textViewAccount.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+        textViewLogout.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+        textViewAbout.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+        textViewPrivateAccount.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+    }
+
+    private void switchIsPrivateCheckedChangeListener() {
+        switchIsPrivate.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean isPrivate) {
+                if (Utils.isNetworkConnected(SettingsActivity.this)) {
+                    username = Preferences.get(SettingsActivity.this, Preferences.USERNAME);
+                    if (!username.isEmpty()) {
+                        if (mUsers != null) {
+                            mUsers.setPrivate(isPrivate);
+                        }
+                        new GetUserInfoUpdateTask(true,false).execute();
+                    }
+                } else {
+                    switchIsPrivate.setChecked(false);
+                    Toast.makeText(getApplicationContext(), R.string.pleaseCheckInternetConnection, Toast.LENGTH_SHORT);
+                }
+            }
+        });
+    }
+
+    private class GetUserInfoUpdateTask extends AsyncTask<Void, Void, Users> {
+
+        boolean isUpdate;
+        boolean isLogout;
+        ProgressDialog pDialog = new ProgressDialog(SettingsActivity.this);
+        public GetUserInfoUpdateTask(boolean isUpdate,boolean isLogout) {
+            this.isUpdate = isUpdate;
+            this.isLogout = isLogout;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            try {
+                pDialog.setMessage(getString(R.string.loading));
+                pDialog.setCancelable(false);
+                pDialog.show();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        protected Users doInBackground(Void... params) {
+            if (isUpdate) {
+                if (mUsers!=null)
+                SwapUser.updateUsers(SettingsActivity.this, mUsers);
+            } else {
+                return SwapUser.getUser(SettingsActivity.this, Preferences.get(SettingsActivity.this, Preferences.USERNAME));
+            }
+            return null;
+
+        }
+
+        protected void onPostExecute(Users user) {
+            timerDelayRemoveDialog(3000,pDialog,isLogout);
+            if (!isUpdate) {
+                mUsers = user;
+                setUserData(user);
+                Log.d("result :", String.valueOf(user));
+            }
+        }
+    }
+
+    public void timerDelayRemoveDialog(final long time, final ProgressDialog d, final boolean isLogout){
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                try {
+                    if (isLogout){
+                        Preferences.logOut(SettingsActivity.this);
+                    }
+                    if (d != null && d.isShowing()) {
+                        d.dismiss();
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+            }
+        }, time);
+    }
+    private void setUserData(Users result) {
+        if (result != null) {
+            switchIsPrivate.setChecked(result.isPrivate());
+        }
+    }
+
+
+    private void showWaitDialog(String message) {
+        closeWaitDialog();
+        try {
+            waitDialog = new ProgressDialog(this);
+            waitDialog.setTitle(message);
+            waitDialog.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void closeWaitDialog() {
+        try {
+            if (waitDialog.isShowing()) {
+                waitDialog.dismiss();
+            }
+        } catch (Exception e) {
+            //
+        }
+    }
+
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.textViewEditProfile:
+                Intent i = new Intent(SettingsActivity.this, EditProfileActivity.class);
+                startActivity(i);
+                break;
+            case R.id.textViewPrivacyPolicy:
+                Intent privacyPolicy = new Intent(SettingsActivity.this, PrivacyPolicyActivity.class);
+                startActivity(privacyPolicy);
+                break;
+            case R.id.textViewConnectSocialMedia:
+                Intent connectSocialMedia = new Intent(SettingsActivity.this, ConnectSocialMediaActivity.class);
+                connectSocialMedia.putExtra("isFromSettings", true);
+                startActivity(connectSocialMedia);
+                break;
+            case R.id.textViewLogout:
+                logOutalertDialog(getString(R.string.alert_exit));
+                break;
+        }
+    }
+
+    private void logOut() {
+        if (Utils.isNetworkConnected(this)) {
+            //Preferences.saveBooleanValue(this, Preferences.IsLoginOrSignup, false);
+            if (AppHelper.getCurrUser() != null && !AppHelper.getCurrUser().equals("")) {
+                AppHelper.init(getApplicationContext());
+                username = AppHelper.getCurrUser();
+                if (!username.isEmpty()) {
+                    user = AppHelper.getPool().getUser(username);
+                    if (!user.equals("")) {
+                        user.signOut();
+                    } else {
+                        Log.e("tag", "not sigout");
+                    }
+                }
+            }
+            if (mUsers != null) {
+                mUsers.setPoints(0);
+                mUsers.setWillShareInstagram(false);
+                mUsers.setWillSharePhone(false);
+                mUsers.setWillShareEmail(false);
+                mUsers.setWillShareGitHub(false);
+                mUsers.setWillSharePinterest(false);
+                mUsers.setWillShareReddit(false);
+                mUsers.setWillShareSpotify(false);
+                mUsers.setWillShareVimeo(false);
+                mUsers.setWillShareTwitter(false);
+                mUsers.setWillShareYouTube(false);
+                mUsers.setWillShareSoundCloud(false);
+                mUsers.setNotification_id_one_signal("");
+            }
+            new GetUserInfoUpdateTask(true,true).execute();
+
+        } else {
+            Toast.makeText(this, getString(R.string.pleaseCheckInternetConnection), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private void logOutalertDialog(String message) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.areYouSure);
+        builder.setMessage(message);
+        builder.setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+                logOut();
+            }
+        });
+        builder.setNegativeButton(getString(R.string.cancel), new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    GetDetailsHandler detailsHandler = new GetDetailsHandler() {
+        @Override
+        public void onSuccess(CognitoUserDetails cognitoUserDetails) {
+            // closeWaitDialog();
+            // Store details in the AppHandler
+            AppHelper.setUserDetails(cognitoUserDetails);
+            // Trusted devices?
+            handleTrustedDevice();
+        }
+
+        @Override
+        public void onFailure(Exception exception) {
+            //closeWaitDialog();
+            // showDialogMessage("Could not fetch users details!", AppHelper.formatException(exception), true);
+        }
+    };
+
+    private void handleTrustedDevice() {
+        CognitoDevice newDevice = AppHelper.getNewDevice();
+        if (newDevice != null) {
+            AppHelper.newDevice(null);
+            // trustedDeviceDialog(newDevice);
+        }
+    }
+}

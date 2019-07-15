@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:amazon="http://schemas.amazon.com/apk/res/android"
+    package="com.swap">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- Optional permission, needed for geo tagging feature. -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.amazon.device.messaging.permission.RECEIVE" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_GPS" />
+    <uses-permission android:name="android.permission.ACCESS_ASSISTED_GPS" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.WRITE_CONTACTS" />
+
+    <permission
+        android:name="com.onesignal.example.permission.RECEIVE_ADM_MESSAGE"
+        android:protectionLevel="signature" />
+
+    <uses-permission android:name="com.onesignal.example.permission.RECEIVE_ADM_MESSAGE" />
+
+    <application
+        android:name=".controller.ApplicationController"
+        android:resizeableActivity="false"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity
+            android:name=".views.activities.SplashActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+            <!-- Branch Sdk Start -->
+
+            <intent-filter>
+                <data
+                    android:host="open"
+                    android:scheme="swap" />
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+            </intent-filter>
+
+            <!-- <intent-filter>
+                 <data android:scheme="branchsters" />
+                 <action android:name="android.intent.action.VIEW" />
+                 <category android:name="android.intent.category.DEFAULT" />
+                 <category android:name="android.intent.category.BROWSABLE" />
+             </intent-filter>-->
+
+            <!-- AppLink config -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- <data android:scheme="https" android:host="bnc.lt" android:pathPrefix="/your_app_id_obtained form Branch dash board " /> -->
+                <data
+                    android:host="swap.app.link"
+                    android:scheme="https" />
+                <data
+                    android:host="swap.app.link"
+                    android:scheme="http" />
+            </intent-filter>
+            <!-- Branch Sdk Start -->
+        </activity>
+
+        <!-- OneSignal Start -->
+        <amazon:enable-feature
+            android:name="com.amazon.device.messaging"
+            android:required="false" />
+        <!-- Warnings about " is not assignable" can be safely ignored. -->
+        <service
+            android:name="com.onesignal.ADMMessageHandler"
+            android:exported="false" />
+
+        <receiver
+            android:name="com.onesignal.ADMMessageHandler$Receiver"
+            android:permission="com.amazon.device.messaging.permission.SEND">
+            <intent-filter>
+                <action android:name="com.amazon.device.messaging.intent.REGISTRATION" />
+                <action android:name="com.amazon.device.messaging.intent.RECEIVE" />
+
+                <category android:name="com.swap" />
+            </intent-filter>
+        </receiver>
+        <!-- OneSignal End -->
+
+
+        <!-- Branch Sdk Start -->
+        <meta-data
+            android:name="io.branch.sdk.BranchKey"
+            android:value="@string/branch_key_live" />
+        <meta-data
+            android:name="io.branch.sdk.auto_link_request_code"
+            android:value="@integer/AutoDeeplinkRequestCode" />
+
+        <receiver
+            android:name="io.branch.referral.InstallListener"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.android.vending.INSTALL_REFERRER" />
+            </intent-filter>
+        </receiver>
+        <!-- Branch Sdk End -->
+        <activity
+            android:name=".views.activities.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.LoginActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.SignUpNameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.SignUpDOBActivity"
+            android:label="@string/title_activity_sign_up_dob"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name=".views.activities.SignUpEmailActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.SignUpUsernameActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.SignUpPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.SignUpConfirmationCodeActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.ConnectSocialMediaActivity"
+            android:screenOrientation="portrait" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:scheme="com.swap"
+                    android:host="soundcloud"
+                    android:pathPrefix="/redirect"/>
+
+                <data android:host="swapapp.co"
+                    android:scheme="http"
+                    android:path="/" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="pdk4853178264895635722" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <!-- vimeo{CLIENT_KEY} -->
+                <data android:scheme="vimeo/3RO81tpJUiUj7qhEnShjTKNYzKRAcXmarcBHzgirUAe+dg6GHFxA35NLo0InFHA5ViCacjhuvaFeuirdU1IuOpTSJCRbtQsJMGTeC7FAVmUc8pGsRuQt5pFuEpgpnBS"/>
+                <!-- auth -->
+                <data android:host="https://api.vimeo.com/oauth/authorize"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".views.activities.SwapTutorialActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.ForgotPasswordActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.SignUpPhoneNumberActivity"
+            android:screenOrientation="portrait" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4fad5fc3c103b0e707861f1e5a4eba23438cfb41" />
+
+        <activity
+            android:name=".views.activities.SelectPictureActivity"
+            android:screenOrientation="portrait" />
+
+        <activity
+            android:name=".views.activities.SettingsActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.EditProfileActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.MoreInfoActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.PrivacyPolicyActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.HomeActivity"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustPan" />
+        <activity
+            android:name=".views.activities.QrReaderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.SwapHistoryActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".views.activities.SwapProfileActivity"
+            android:screenOrientation="portrait" />
+
+        <service
+            android:name="com.amazonaws.mobileconnectors.s3.transferutility.TransferService"
+            android:enabled="true" />
+
+        <!--Spotify-->
+        <!-- Needed for LoginActivity to work -->
+        <activity
+            android:name="com.spotify.sdk.android.authentication.LoginActivity"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
+                  android:theme="@style/Base.Theme.AppCompat"/>
+    </application>
+
+    <meta-data
+        android:name="com.google.android.gms.vision.DEPENDENCIES"
+        android:value="barcode" />
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+</manifest>

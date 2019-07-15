@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/relativeLayoutRaw"
+    android:orientation="horizontal">
+
+    <com.swap.utilities.RoundedImageView
+        android:id="@+id/imageViewSwapUserProfilePic"
+        android:layout_width="75dp"
+        android:layout_height="75sp"
+        android:layout_centerVertical="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/profile_picture_default_icon" />
+
+    <LinearLayout
+        android:id="@+id/linearLayoutUserDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@+id/imageViewArrow"
+        android:layout_toRightOf="@+id/imageViewSwapUserProfilePic"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewSwapUserName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Username"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewSwapTime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Last week"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/colorGray"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/linearLayoutSocialMedia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/imageViewRedit"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/redit_black" />
+
+            <ImageView
+                android:id="@+id/imageViewSpotify"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_toRightOf="@+id/imageViewRedit"
+                android:src="@drawable/spotify_black" />
+
+            <ImageView
+                android:id="@+id/imageViewCall"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_toRightOf="@+id/imageViewSpotify"
+                android:src="@drawable/phone_black" />
+
+            <ImageView
+                android:id="@+id/imageViewEmail"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_toRightOf="@+id/imageViewCall"
+                android:src="@drawable/email_black" />
+
+            <ImageView
+                android:id="@+id/imageViewInstagram"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_toRightOf="@+id/imageViewEmail"
+                android:src="@drawable/instagram_black" />
+
+            <ImageView
+                android:id="@+id/imageViewGithub"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_toRightOf="@+id/imageViewInstagram"
+                android:src="@drawable/github_black" />
+
+            <ImageView
+                android:id="@+id/imageViewVimeo"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/vimeo_black" />
+
+            <ImageView
+                android:id="@+id/imageViewTwitter"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/twitter_black" />
+
+            <ImageView
+                android:id="@+id/imageViewYoutube"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/youtube_black" />
+
+            <ImageView
+                android:id="@+id/imageViewSoundCloud"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/soundcloud_black" />
+
+            <ImageView
+                android:id="@+id/imageViewPinterest"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:src="@drawable/pinterest_black" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewArrow"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/ic_arrow_right" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/imageViewSwapUserProfilePic"
+        android:background="@color/colorLightGray"/>
+</RelativeLayout>

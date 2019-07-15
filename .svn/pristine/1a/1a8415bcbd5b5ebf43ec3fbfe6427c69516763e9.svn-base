@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="E:\Anjali_Files\Android_Studio\sdk\extras\android\m2repository\com\android\support\support-annotations\26.0.0-alpha1\support-annotations-26.0.0-alpha1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="023ee503b631f69511e335a061ea008f8da60f40">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\support-annotations-26.0.0-alpha1_d89ea684ff8f28c91dbd98ef0ba7ada188f9ced9\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\1cd1351c8713d12b80305db64495ef2f2be12d5e\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6a022bf00ccd0948a8180c505e8e458bbddd43a6">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_39252efcc2034e3635b8f31fde503038fdfb9a1c\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\486c604ce2e9bd243edf338c3de681bc253d329b\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="cddcd0fb93bc70e27325f2f715b2710332004ebb">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_23d02033d8bcfdda61a19cf9972efb93f399ae7b\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\3104f36e9fd8364586203071a672910b3621573a\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6cfe119a4d5986e4a93f4d14909f55871a601271">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_457a38d654a3a0fa5ed1fd96b1ee6ce2b6c98ad1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\187abf01846287aa14917f516c9fe899b32e548f\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="47471eb19df288158b00b8d9cfa41bce7373f5cc">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e42293ef61e2896986a4124d68589cd37106944f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\4551b5ccd80d0c041a4d8c563e80a47db10bbf99\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="756f6297eef79784f5e356dcd4f39865028b2bd0">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_e6d7f4b3ae7ee438ea4dd00dcbc34bfa127f5702\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\c0f69e2077e73665e9cb8998944a0ae399651952\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="94ba691efc31bf53264db0716d9c9ec03843ea31">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a3b38dabe8342866128fdb5b0aff820656f91ccb\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\9250cefb10c1f07ad7944b06429811d21f992db4\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="8df0e365e40beb151bc42dee20817721a6cab7b0">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_dc5e305d3b7948c1f62e03581d33627382f8e51e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\95b862ededf7b48c1392fb279c05438b4ebd9d7e\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="d7c42c80f6509b9ea4db28ca7859ffae08ec5741">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_819bcbdbe8936ca530c6b22f7bd3a0241934ac7f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\e2d7b4b63a9f0d882760f64a24af4417190e7d25\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="952944218ecedea1554a513dec0c14d570642843">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_04015f133491e918c494aa41207bbdc57ac2394f\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\7ff6dd43a832b19666f26a2fcd3a2123039092cd\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="c4f45092eee6cdf1a5dbd597b2b6819be652ce2e">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_7b4a2267d57bd17fd9e7dea9c932ed8ee50f9444\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-core\2.3.2\e1ab374265a269314babb1e8e9e96452cf68b481\aws-android-sdk-core-2.3.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="e1ab374265a269314babb1e8e9e96452cf68b481">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\aws-android-sdk-core-2.3.2_f9aec42613e7e2204e099493b5cc4e7b366ed85a\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Program Files\Android\Android Studio\gradle\m2repository\com\google\code\gson\gson\2.2.4\gson-2.2.4.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="a60a5e993c98c864010053cb901b7eab25306568">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\gson-2.2.4_313aff129984a0a45e086871ec03bfcc02e7284e\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\a601dfea5ab6f7011ae4dd19365797873659c3ec\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="fcd01fd11233459f546c437ec927e9b61bf7caf1">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_67f59f37345de3b7eada2f0fbc1a39d157992484\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\7ab9f4b8f1676e82e83f44679e3960704f4f1c7d\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="88246166d5afb106f532f6e6deae683c66b42c89">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_93c6c303d8d4b783f17839cbd92c453abbe43088\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\b85e7d7c331f3fdf99c728fa9c5aad4465701a39\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6addaba208e21c6da776d0ca75b6b23a6ccd5499">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_b2c0453701543a094a4d16c00df7346e6080edf1\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\2315b33fa15a6c6a1e1d4e6254dda67e4e34dc2c\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="9935891f23923f39d002087085d9696568a9f657">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_de73c82c384babbb20093fced42a9d7222e95775\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\67b3eb05385d5951021d7645e971e66fbff769e9\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="6bb5d347ebc0c6ef3c83a905222a688da5d2f7b4">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_134077c9e74f099fa8f9ce90596abec9560a8104\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\4044563f6c8c68eb62ffb78b0b951f08f3ac0404\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="18d31838aa4fcc768a8a0516e22cc13b94655d89">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_8de94e859ab423b43c4a2be577020a631ba6d353\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\3dd74911ede8e8453ccdd36f0dc14e795dd1da1a\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="3d9c3425c14a332dca7970314258d91817bc7ebf">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_de9cb256a8cb0c992746ff871ba5176ed1b64241\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\826ca6fcbb4f094c73831dc9566dfc302f0c548d\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="2e92aa0163544a804a0b34f169ca61801770839a">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_6aef303a1bb6d93ac9a31c9d9266f308bacb4038\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\c639a1b490177bb0b28ad82f1d94d84180d80894\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="ffde64dbb0fc07c8b9735c6c42a06a36be15ed13">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_4761011bad61d556c4d8ed949035b6c7e59d0617\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="E:\Anjali_Files\Android_Studio\sdk\extras\m2repository\com\android\support\constraint\constraint-layout-solver\1.0.2\constraint-layout-solver-1.0.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="b9cd8fc6bd15cb915735d34535db30ece0c44603">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\constraint-layout-solver-1.0.2_a03899e7f9b9c5140e1a99f0c1608f5b15b28a96\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\b41ff1b58e2a71c9d37ece3b87d1b343372f12f5\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="44a694d4095be84c2888764b1f7256b385c030ad">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_a935d7aed907ae30ab6a4e79e7578a2cac406f07\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\7b20c372c7b1faef997b560e5f08a77cb4b37f68\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="8308ed003522a2ee8958311afcc4cfd0470377cd">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_1568ae64563ccc7db6e442e933227cb2c8ed137d\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\c3997de09a4b4bc5524e9b9c9856389f09067dad\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="25438f55fc6d906a0e72f30b21487541430ede43">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_f2e730566eca17f0a18fbbecc688a8369a69cdde\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.gradle\caches\modules-2\files-2.1\com.amazonaws\aws-android-sdk-cognitoidentityprovider\2.3.2\a0f7bb46189be243f3e7a34634bbd9c26baec10\aws-android-sdk-cognitoidentityprovider-2.3.2.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="0a0f7bb46189be243f3e7a34634bbd9c26baec10">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\aws-android-sdk-cognitoidentityprovider-2.3.2_4abed2b3cb36e3378f7b048bdc7e3a4e951da779\classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="C:\Users\anjali\.android\build-cache\0a8582bf1cfaf0beae2205e48bf37cc0c37aee57\output\jars\classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.3"
+        sha1="44ee06abb66da30f5855e6bf54574e64cdcd982a">
+        <dex dex="D:\WorkSpace03072017\Swap\app\build\intermediates\transforms\dex\debug\folders\1000\10\classes_5335a98ddfafc9194fe7ef90157fc3aaadef2b32\classes.dex" />
+    </item>
+
+</items>

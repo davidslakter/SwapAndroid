@@ -1,0 +1,53 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.swap.views.fragments.SwapTutorialPageOneFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewSwap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="55dp"
+            android:gravity="center_horizontal"
+            android:text="@string/swap"
+            android:textColor="@color/colorBlack"
+            android:textSize="18.5dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/textViewTheFasterWayToTrulyConnect"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:textColor="@color/colorBlack"
+            android:gravity="center_horizontal"
+            android:text="@string/theFastestWayToTrulyConnect" />
+
+        <TextView
+            android:id="@+id/textViewWelcomeToSwap"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="65dp"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorGray"
+            android:text="@string/welcomeToSwap"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/textViewLeftSwipeToContinue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:textColor="@color/colorGray"
+            android:gravity="center_horizontal"
+            android:text="@string/leftSwipeToContinue" />
+    </LinearLayout>
+
+</FrameLayout>

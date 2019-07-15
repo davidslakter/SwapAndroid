@@ -1,0 +1,237 @@
+package com.swap.models;
+
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBAttribute;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBHashKey;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBNativeBoolean;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBRangeKey;
+import com.amazonaws.mobileconnectors.dynamodbv2.dynamodbmapper.DynamoDBTable;
+import com.swap.utilities.Constants;
+
+@DynamoDBTable(tableName = Constants.TABLE_SWAP_HISTORY)
+public class SwapHistory {
+
+    private String swap;
+    private String swapped;
+    private boolean didShareBirthday;
+    private boolean didShareEmail;
+    private boolean didShareInstagram;
+    private boolean didSharePhonenumber;
+    private boolean didSharePinterest;
+    private boolean didShareReddit;
+    private boolean didShareSoundCloud;
+    private boolean didShareSpotify;
+    private boolean didShareTwitter;
+    private boolean didShareVine;
+    private boolean didShareYouTube;
+    private boolean didShareGitHub;
+    private boolean didShareVimeo;
+    private String location;
+    private String method;
+    private double time;
+    private boolean didGiveSwapPointsFromSwap;
+    private String latitude;
+    private String longitude;
+
+    @DynamoDBHashKey(attributeName = "swap")
+    public String getSwap() {
+        return swap;
+    }
+
+    public void setSwap(String swap) {
+        this.swap = swap;
+    }
+
+    @DynamoDBRangeKey(attributeName = "swapped")
+    public String getSwapped() {
+        return swapped;
+    }
+
+    public void setSwapped(String swapped) {
+        this.swapped = swapped;
+    }
+
+    @DynamoDBAttribute(attributeName = "didShareBirthday")
+    @DynamoDBNativeBoolean
+    public boolean getDidShareBirthday() {
+        return didShareBirthday;
+    }
+
+    public void setDidShareBirthday(boolean didShareBirthday) {
+        this.didShareBirthday = didShareBirthday;
+    }
+
+    @DynamoDBAttribute(attributeName = "didShareEmail")
+    @DynamoDBNativeBoolean
+    public boolean getDidShareEmail() {
+        return didShareEmail;
+    }
+
+    public void setDidShareEmail(boolean didShareEmail) {
+        this.didShareEmail = didShareEmail;
+    }
+
+    @DynamoDBAttribute(attributeName = "didShareInstagram")
+    @DynamoDBNativeBoolean
+    public boolean getDidShareInstagram() {
+        return didShareInstagram;
+    }
+
+    public void setDidShareInstagram(boolean didShareInstagram) {
+        this.didShareInstagram = didShareInstagram;
+    }
+
+    @DynamoDBAttribute(attributeName = "didSharePhonenumber")
+    @DynamoDBNativeBoolean
+    public boolean getDidSharePhonenumber() {
+        return didSharePhonenumber;
+    }
+
+    public void setDidSharePhonenumber(boolean didSharePhonenumber) {
+        this.didSharePhonenumber = didSharePhonenumber;
+    }
+
+    @DynamoDBAttribute(attributeName = "didSharePinterest")
+    @DynamoDBNativeBoolean
+    public boolean getDidSharePinterest() {
+        return didSharePinterest;
+    }
+
+    public void setDidSharePinterest(boolean didSharePinterest) {
+        this.didSharePinterest = didSharePinterest;
+    }
+
+    @DynamoDBAttribute(attributeName = "didShareReddit")
+    @DynamoDBNativeBoolean
+    public boolean getDidShareReddit() {
+        return didShareReddit;
+    }
+
+    public void setDidShareReddit(boolean didShareReddit) {
+        this.didShareReddit = didShareReddit;
+    }
+
+    @DynamoDBAttribute(attributeName = "didShareSoundCloud")
+    @DynamoDBNativeBoolean
+    public boolean getDidShareSoundCloud() {
+        return didShareSoundCloud;
+    }
+
+    public void setDidShareSoundCloud(boolean didShareSoundCloud) {
+        this.didShareSoundCloud = didShareSoundCloud;
+    }
+
+    @DynamoDBAttribute(attributeName = "didShareSpotify")
+    @DynamoDBNativeBoolean
+    public boolean getDidShareSpotify() {
+        return didShareSpotify;
+    }
+
+    public void setDidShareSpotify(boolean didShareSpotify) {
+        this.didShareSpotify = didShareSpotify;
+    }
+
+    @DynamoDBAttribute(attributeName = "didShareTwitter")
+    @DynamoDBNativeBoolean
+    public boolean getDidShareTwitter() {
+        return didShareTwitter;
+    }
+
+    public void setDidShareTwitter(boolean didShareTwitter) {
+        this.didShareTwitter = didShareTwitter;
+    }
+
+    @DynamoDBAttribute(attributeName = "didShareVine")
+    @DynamoDBNativeBoolean
+    public boolean getDidShareVine() {
+        return didShareVine;
+    }
+
+    public void setDidShareVine(boolean didShareVine) {
+        this.didShareVine = didShareVine;
+    }
+
+    @DynamoDBAttribute(attributeName = "didShareYouTube")
+    @DynamoDBNativeBoolean
+    public boolean getDidShareYouTube() {
+        return didShareYouTube;
+    }
+
+    public void setDidShareYouTube(boolean didShareYouTube) {
+        this.didShareYouTube = didShareYouTube;
+    }
+
+    @DynamoDBAttribute(attributeName = "didShareGitHub")
+    @DynamoDBNativeBoolean
+    public boolean getDidShareGitHub() {
+        return didShareGitHub;
+    }
+
+    public void setDidShareGitHub(boolean didShareGitHub) {
+        this.didShareGitHub = didShareGitHub;
+    }
+
+    @DynamoDBAttribute(attributeName = "didShareVimeo")
+    @DynamoDBNativeBoolean
+    public boolean getDidShareVimeo() {
+        return didShareVimeo;
+    }
+
+    public void setDidShareVimeo(boolean didShareVimeo) {
+        this.didShareVimeo = didShareVimeo;
+    }
+
+    @DynamoDBAttribute(attributeName = "location")
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    @DynamoDBAttribute(attributeName = "method")
+    public String getMethod() {
+        return method;
+    }
+
+    public void setMethod(String method) {
+        this.method = method;
+    }
+
+    @DynamoDBAttribute(attributeName = "time")
+    public double getTime() {
+        return time;
+    }
+
+    public void setTime(double time) {
+        this.time = time;
+    }
+
+    @DynamoDBAttribute(attributeName = "didGiveSwapPointsFromSwap")
+    @DynamoDBNativeBoolean
+    public boolean getDidGiveSwapPointsFromSwap() {
+        return didGiveSwapPointsFromSwap;
+    }
+
+    public void setDidGiveSwapPointsFromSwap(boolean didGiveSwapPointsFromSwap) {
+        this.didGiveSwapPointsFromSwap = didGiveSwapPointsFromSwap;
+    }
+
+    @DynamoDBAttribute(attributeName = "latitude")
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(String latitude) {
+        this.latitude = latitude;
+    }
+
+    @DynamoDBAttribute(attributeName = "longitude")
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(String longitude) {
+        this.longitude = longitude;
+    }
+}

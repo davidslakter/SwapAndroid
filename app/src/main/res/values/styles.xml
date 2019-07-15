@@ -1,0 +1,65 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="actionMenuTextColor">@color/colorWhite</item>
+        <item name="android:actionMenuTextColor">@color/colorWhite</item>
+
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="pinEditTextStyle">
+        <item name="android:gravity">center</item>
+        <item name="android:cursorVisible">false</item>
+        <item name="android:maxLength">1</item>
+        <item name="android:minEms">2</item>
+        <item name="android:inputType">textPassword</item>
+        <item name="android:focusable">true</item>
+        <item name="android:focusableInTouchMode">true</item>
+    </style>
+
+    <style name="Widget.App.EditText" parent="Widget.AppCompat.EditText">
+        <item name="colorAccent">@color/colorLightGray</item>
+
+        <item name="colorControlNormal">@color/colorLightGray</item>
+        <item name="colorControlActivated">@color/colorLightGray</item>
+        <item name="colorControlHighlight">@color/colorLightGray</item>
+
+        <item name="android:textColor">@color/colorBlack</item>
+        <item name="android:textColorHint">@color/colorLightGray</item>
+        <item name="android:backgroundTint">@color/colorLightGray</item>
+
+    </style>
+
+   <!-- <style name="MyTheme" parent="Widget.Design.TextInputLayout">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:backgroundTint">@color/colorWhite</item>
+        <item name="colorAccent">@color/colorWhite</item>
+    </style>-->
+
+    <style name="TextAppearence.App.TextInputLayout" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="colorAccent">@color/colorLightGray</item>
+    </style>
+
+    <style name="editTextStyleWhite" parent="@android:style/TextAppearance.Medium">
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:imeOptions">actionNext</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textColor">@color/colorWhite</item>
+        <item name="android:textColorHint">@color/colorWhite</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:background">@drawable/edit_text_background</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:padding">15dp</item>
+    </style>
+
+</resources>

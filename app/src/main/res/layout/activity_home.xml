@@ -1,0 +1,126 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_content"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.sothree.slidinguppanel.SlidingUpPanelLayout xmlns:sothree="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/sliding_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom"
+        sothree:umanoDragView="@+id/dragView"
+        sothree:umanoFadeColor="@android:color/transparent"
+        sothree:umanoOverlay="false"
+        sothree:umanoPanelHeight="@dimen/slide_panel_height"
+        sothree:umanoParalaxOffset="0dp"
+        sothree:umanoShadowHeight="4dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v4.view.ViewPager
+                android:id="@+id/main_tab_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/layout_toolbar"
+                android:background="@android:color/white" />
+
+            <include
+                android:id="@+id/layout_toolbar"
+                layout="@layout/toolbar" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:keepScreenOn="true">
+
+            <android.support.design.widget.TabLayout
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/tab_background"
+                app:tabGravity="fill" />
+
+            <com.swap.utilities.CameraSourcePreview
+                android:id="@+id/cameraSourcePreview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tab_layout" />
+            <Button
+                android:id="@+id/buttonGallery"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:layout_below="@+id/tab_layout"
+                android:background="@drawable/ic_upload_image" />
+            <LinearLayout
+                android:id="@+id/layoutUserProfile"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#E6ffffff"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/layoutUserNavigation"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:background="@drawable/round_corner_layout_low_radius"
+                    android:orientation="vertical"
+                    android:padding="20dp">
+
+                    <com.swap.utilities.RoundedImageView
+                        android:id="@+id/imageViewUser"
+                        android:layout_width="70dp"
+                        android:layout_height="70dp"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@drawable/profile_picture_default_icon" />
+
+                    <TextView
+                        android:id="@+id/tvUserName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="2dp"
+                        android:textStyle="bold"
+                        android:visibility="visible" />
+
+                    <TextView
+                        android:id="@+id/tvUserBio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="10dp"
+                        android:maxLines="3"
+
+                        android:textSize="13sp"
+                        android:visibility="visible" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </com.sothree.slidinguppanel.SlidingUpPanelLayout>
+
+    <ImageButton
+        android:id="@+id/imgSwapCircle"
+        android:layout_width="80dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/center_tab_indicator"
+        android:src="@drawable/swap_circle_icon" />
+
+</RelativeLayout>

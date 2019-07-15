@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorVividCyan"
+    tools:context="com.swap.views.activities.SignUpEmailActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:focusable="false"
+        android:focusableInTouchMode="true"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textViewSingUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:textColor="@color/colorWhite"
+            android:textSize="16sp"
+            android:layout_marginTop="30dp"
+            android:text="@string/signUpTitle" />
+
+        <!--  Email Label -->
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="30dp"
+            android:textColor="@color/colorWhite"
+            android:textColorHint="@color/colorHint">
+
+            <EditText
+                android:id="@+id/editTextEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/colorWhite"
+                android:hint="@string/email"
+                android:gravity="center_horizontal"
+                android:inputType="textEmailAddress"
+                android:paddingBottom="20dp"
+                android:maxLength="50"
+                android:textColor="@color/colorWhite"
+                android:textColorHint="@color/colorHint"
+                android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="45dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/buttonBack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:gravity="left"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:text="@string/back"/>
+            <Button
+                android:id="@+id/buttonNext"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@android:color/transparent"
+                android:textColor="@color/colorWhite"
+                android:gravity="right"
+                android:textSize="16sp"
+                android:textAllCaps="false"
+                android:text="@string/next"/>
+        </LinearLayout>
+    </LinearLayout>
+</RelativeLayout>

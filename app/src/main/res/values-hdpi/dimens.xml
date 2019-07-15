@@ -1,0 +1,34 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="corner_radius">8dp</dimen>
+    <dimen name="corner_radius_zero">0dp</dimen>
+    <dimen name="tab_space_top">4dp</dimen>
+    <dimen name="tab_space">0dp</dimen>
+    <dimen name="tab_space_plus1">3dp</dimen>
+    <dimen name="tab_space_bottom_line">36sp</dimen>
+    <dimen name="tab_space_unselected_top">6sp</dimen>
+    <dimen name="qr_code_width">162dp</dimen>
+    <dimen name="qr_code_height">132dp</dimen>
+    <dimen name="info_image_margin_right">60dp</dimen>
+    <dimen name="seperator_margin_right">12dp</dimen>
+    <dimen name="seperator_margin_left">20dp</dimen>
+    <dimen name="connect_social_media_margin_left">60dp</dimen>
+    <dimen name="connect_social_media_margin_right">60dp</dimen>
+    <dimen name="twitter_icon_width">50dp</dimen>
+    <dimen name="twitter_icon_height">50dp</dimen>
+    <dimen name="margin_profile_image">15dp</dimen>
+    <dimen name="margin_Social_image">15dp</dimen>
+    <dimen name="margin_bio">10dp</dimen>
+    <dimen name="margin_phoneno_field">20dp</dimen>
+    <dimen name="margin_select_picture_field">20dp</dimen>
+    <dimen name="margin_select_picture_item">100dp</dimen>
+    <dimen name="margin_accept_deny_button">30dp</dimen>
+    <dimen name="margin_username">10dp</dimen>
+    <dimen name="margin_password">5dp</dimen>
+    <dimen name="margin_next_top">30dp</dimen>
+    <dimen name="margin_forgot_password_login">35dp</dimen>
+    <dimen name="margin_username_forgot_password">12dp</dimen>
+    <dimen name="slide_panel_height">45dp</dimen>
+    <dimen name="swap_button_locked_padding_bottom">3dp</dimen>
+
+</resources>

@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/background_swap"
+                tools:context="com.swap.views.fragments.ProfileFragment">
+
+    <include
+        android:id="@+id/layout_toolbar"
+        layout="@layout/toolbar"
+        />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layout_toolbar"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="55dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:id="@+id/frameLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <com.swap.utilities.RoundedImageView
+                    android:id="@+id/imageViewProfilePicture"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_profile_image"
+                    android:src="@drawable/profile_picture_default_icon"/>
+
+                <ImageView
+                    android:id="@+id/imgViewVerified"
+                    android:layout_width="15dp"
+                    android:layout_height="15dp"
+                    android:background="@drawable/verified_tickmark"
+                    android:layout_marginBottom="3dp"
+                    android:visibility="gone"
+                    android:layout_gravity="right|center"/>
+            </FrameLayout>
+
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_bio"
+                android:text="Name"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"/>
+
+            <View
+                android:layout_width="200dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="@dimen/margin_bio"
+                android:background="@color/colorWhite"/>
+
+            <TextView
+                android:id="@+id/textViewBio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/margin_bio"
+                android:text="bio"
+                android:textColor="@color/colorWhite"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutSocialMedia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_Social_image"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imageViewRedit"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_reddit_icon"/>
+
+                <ImageView
+                    android:id="@+id/imageViewSpotify"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@+id/imageViewRedit"
+                    android:src="@drawable/ic_spotify_icon"/>
+
+                <ImageView
+                    android:id="@+id/imageViewCall"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@+id/imageViewSpotify"
+                    android:src="@drawable/ic_contact_icon"/>
+
+                <ImageView
+                    android:id="@+id/imageViewEmail"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@+id/imageViewCall"
+                    android:src="@drawable/ic_email_icon"/>
+
+                <ImageView
+                    android:id="@+id/imageViewInstagram"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@+id/imageViewEmail"
+                    android:src="@drawable/ic_instagram_icon"/>
+
+                <ImageView
+                    android:id="@+id/imageViewGithub"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:visibility="gone"
+                    android:layout_toRightOf="@+id/imageViewInstagram"
+                    android:src="@drawable/ic_github_icon"/>
+
+                <ImageView
+                    android:id="@+id/imageViewVimeo"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_vimeo_icon"/>
+
+                <ImageView
+                    android:id="@+id/imageViewTwitter"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_twitter_icon"/>
+
+                <ImageView
+                    android:id="@+id/imageViewYoutube"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_youtube_icon"/>
+
+                <ImageView
+                    android:id="@+id/imageViewSoundCloud"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_soundcloud_icon"/>
+
+                <ImageView
+                    android:id="@+id/imageViewPinterest"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:visibility="gone"
+                    android:src="@drawable/ic_pinterest_icon"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/buttonSwap"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/privateswapbutton"
+                android:gravity="center"
+                android:paddingBottom="@dimen/swap_button_locked_padding_bottom"
+                android:text="@string/swap"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="0dp"
+                android:gravity="center">
+
+                <LinearLayout
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:background="@drawable/circle_backgroung">
+
+                    <TextView
+                        android:id="@+id/tvPointsCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Name"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/circle_backgroung">
+
+                    <TextView
+                        android:id="@+id/tvSwapsCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Name"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="90dp"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/circle_backgroung">
+
+                    <TextView
+                        android:id="@+id/tvSwappedCount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:text="Name"/>
+                </LinearLayout>
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+</RelativeLayout>

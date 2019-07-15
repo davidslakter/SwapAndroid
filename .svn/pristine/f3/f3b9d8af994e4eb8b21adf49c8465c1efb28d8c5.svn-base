@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:focusable="false"
+    android:focusableInTouchMode="true"
+    tools:context="com.swap.views.activities.MoreInfoActivity">
+
+    <include
+        android:id="@+id/layout_toolbar"
+        layout="@layout/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLightGray"
+        android:textColor="@color/colorBlack"
+        android:textSize="14dp"
+        android:textStyle="bold"
+        android:paddingLeft="15dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:text="@string/moreInfoTitle" />
+    <!-- Last Name Label -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextMiddleName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/middleName"
+            android:inputType="textPersonName"
+            android:maxLength="10"
+            android:paddingBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/colorBlack"
+            android:textSize="16sp" />
+    </android.support.design.widget.TextInputLayout>
+    <!-- Last Name Label -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextCompany"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/company"
+            android:inputType="textPersonName"
+            android:maxLength="30"
+            android:paddingBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="16sp" />
+    </android.support.design.widget.TextInputLayout>
+    <!-- Last Name Label -->
+    <android.support.design.widget.TextInputLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextWebsite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/website"
+            android:inputType="textWebEmailAddress"
+            android:maxLength="30"
+            android:paddingBottom="20dp"
+            android:layout_marginLeft="10dp"
+            android:textColor="@color/colorBlack"
+            android:textColorHint="@color/colorWhite"
+            android:textSize="16sp" />
+    </android.support.design.widget.TextInputLayout>
+</LinearLayout>

@@ -1,0 +1,748 @@
+package com.swap.views.activities;
+
+import android.Manifest;
+import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.app.DialogFragment;
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.text.InputFilter;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserAttributes;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserCodeDeliveryDetails;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.CognitoUserDetails;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.GetDetailsHandler;
+import com.amazonaws.mobileconnectors.cognitoidentityprovider.handlers.UpdateAttributesHandler;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferListener;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferObserver;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferState;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferType;
+import com.amazonaws.mobileconnectors.s3.transferutility.TransferUtility;
+import com.squareup.picasso.Picasso;
+import com.swap.R;
+import com.swap.models.SwapUser;
+import com.swap.models.Users;
+import com.swap.utilities.AppHelper;
+import com.swap.utilities.EmojiExcludeFilter;
+import com.swap.utilities.Preferences;
+import com.swap.utilities.RoundedImageView;
+import com.swap.utilities.UpdateAttributes;
+import com.swap.utilities.Utils;
+import com.theartofdev.edmodo.cropper.CropImage;
+import com.theartofdev.edmodo.cropper.CropImageView;
+
+import java.io.File;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener {
+
+    private static final int PERMISSION_REQUEST = 101;
+    TextView textViewMoreInfo;
+    // static TextView textViewDate;
+    EditText editTextFirstName;
+    EditText editTextLastName;
+    EditText editTextEmail;
+    private TextView textViewChange;
+    private TextView textViewBirthday;
+    private TextView textViewBasic;
+    Calendar myCalendar;
+    DatePickerDialog.OnDateSetListener date;
+    static EditText editTextBirthday;
+    RoundedImageView imageViewEditProfileImage;
+    private int CAMERA_REQUEST = 1888;
+    private Uri outPutFileUri;
+    private int SELECT_FILE = 1;
+    Bitmap bitmap;
+    private String userChoosenTask;
+    private ProgressDialog waitDialog;
+    static String dateString = "";
+    String username;
+    Users mUsers;
+    String image;
+    private String path;
+    String filename;
+    String existingProfilePic;
+    String updatedImageURI = "";
+    private TransferUtility transferUtility;
+    String dateResult;
+
+    // The SimpleAdapter adapts the data about transfers to rows in the UI
+
+
+    // A List of all transfers
+    private List<TransferObserver> observers;
+    private static final int INDEX_NOT_CHECKED = -1;
+    /**
+     * This map is used to provide data to the SimpleAdapter above. See the
+     * fillMap() function for how it relates observers to rows in the displayed
+     * activity.
+     */
+    private ArrayList<HashMap<String, Object>> transferRecordMaps;
+
+    // Which row in the UI is currently checked (if any)
+    private int checkedIndex;
+    private String showResults = "";
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_edit_profile);
+
+        transferUtility = Utils.getTransferUtility(this);
+        checkedIndex = INDEX_NOT_CHECKED;
+        transferRecordMaps = new ArrayList<HashMap<String, Object>>();
+        findViewById();
+        inItToolBar();
+    }
+
+
+    private void inItToolBar() {
+        View view = findViewById(R.id.layout_toolbar);
+        Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbarView);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null)
+            getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        TextView mTitle = (TextView) toolbar.findViewById(R.id.textViewTitle);
+        mTitle.setText(R.string.editProfile);
+        toolbar.setNavigationIcon(R.drawable.back_arrow_white);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+        //Set font on view//
+        mTitle.setTypeface(Utils.setFont(this, "avenir-next-regular.ttf"));
+    }
+
+    private void findViewById() {
+        clearData();
+
+        editTextFirstName = (EditText) findViewById(R.id.editTextFirstName);
+        editTextLastName = (EditText) findViewById(R.id.editTextLastName);
+        editTextEmail = (EditText) findViewById(R.id.editTextEmail);
+        textViewMoreInfo = (TextView) findViewById(R.id.textViewMoreInfo);
+        textViewChange = (TextView) findViewById(R.id.textViewChange);
+        editTextBirthday = (EditText) findViewById(R.id.editTextBirthday);
+        textViewBirthday = (TextView) findViewById(R.id.textViewBirthday);
+        textViewBasic = (TextView) findViewById(R.id.textViewBasic);
+        imageViewEditProfileImage = (RoundedImageView) findViewById(R.id.imageViewEditProfileImage);
+        textViewChange.setOnClickListener(this);
+        editTextBirthday.setOnClickListener(this);
+        textViewMoreInfo.setOnClickListener(this);
+        imageViewEditProfileImage.setOnClickListener(this);
+        editTextFirstName.setFilters(new InputFilter[]{new EmojiExcludeFilter(this)});
+        editTextLastName.setFilters(new InputFilter[]{new EmojiExcludeFilter(this)});
+        mUsers = Utils.getUserDateFromPreferences(EditProfileActivity.this, Preferences.UserDate);
+        if (mUsers != null) {
+            setUserData(mUsers);
+        }
+        editTextEmail.setFilters(new InputFilter[]{new EmojiExcludeFilter(this)});
+        setFontOnViews();
+    }
+
+    private void setFontOnViews() {
+        editTextFirstName.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+        editTextLastName.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+        editTextEmail.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+        textViewMoreInfo.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+        textViewChange.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+        editTextBirthday.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+        textViewBirthday.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+        textViewBasic.setTypeface(Utils.setFont(this, "lantinghei.ttf"));
+    }
+
+    private void clearData() {
+        MoreInfoActivity.middleName = "";
+        MoreInfoActivity.company = "";
+        MoreInfoActivity.website = "";
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Get the data from any transfer's that have already happened,
+        initData();
+    }
+
+    private void initData() {
+        transferRecordMaps.clear();
+        // Use TransferUtility to get all upload transfers.
+        observers = transferUtility.getTransfersWithType(TransferType.UPLOAD);
+        TransferListener listener = new UploadListener();
+        for (TransferObserver observer : observers) {
+
+            // For each transfer we will will create an entry in
+            // transferRecordMaps which will display
+            // as a single row in the UI
+            HashMap<String, Object> map = new HashMap<String, Object>();
+            Utils.fillMap(map, observer, false);
+            transferRecordMaps.add(map);
+
+            // Sets listeners to in progress transfers
+            if (TransferState.WAITING.equals(observer.getState())
+                    || TransferState.WAITING_FOR_NETWORK.equals(observer.getState())
+                    || TransferState.IN_PROGRESS.equals(observer.getState())) {
+                observer.setTransferListener(listener);
+            }
+        }
+        // simpleAdapter.notifyDataSetChanged();
+    }
+
+    // Get user details from CIP service
+    private void getDetails() {
+        AppHelper.getPool().getUser(username).getDetailsInBackground(detailsHandler);
+    }
+
+    GetDetailsHandler detailsHandler = new GetDetailsHandler() {
+        @Override
+        public void onSuccess(CognitoUserDetails cognitoUserDetails) {
+            closeWaitDialog();
+            // Store details in the AppHandler
+            AppHelper.setUserDetails(cognitoUserDetails);
+
+        }
+
+        @Override
+        public void onFailure(Exception exception) {
+            closeWaitDialog();
+            // showDialogMessage("Could not fetch user details!", AppHelper.formatException(exception), true);
+        }
+    };
+
+    private class UploadListener implements TransferListener {
+
+        // Simply updates the UI list when notified.
+        @Override
+        public void onError(int id, Exception e) {
+            Log.e("Error during upload:", "Error during upload: " + id, e);
+            //updateList();
+        }
+
+        @Override
+        public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
+            Log.d("onProgressChanged:", String.format("onProgressChanged: %d, total: %d, current: %d",
+                    id, bytesTotal, bytesCurrent));
+            //updateList();
+        }
+
+        @Override
+        public void onStateChanged(int id, TransferState newState) {
+            Log.d("onStateChanged", "onStateChanged: " + id + ", " + newState);
+            // updateList();
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.textViewMoreInfo:
+                Intent intent = new Intent(EditProfileActivity.this, MoreInfoActivity.class);
+                startActivity(intent);
+                break;
+            case R.id.editTextBirthday:
+                DatePickerFragment mDatePicker = new DatePickerFragment();
+                mDatePicker.show(getFragmentManager(), "Select date");
+                break;
+            case R.id.imageViewEditProfileImage:
+                //galleryIntent();
+                CropImage.activity(null).setGuidelines(CropImageView.Guidelines.ON).start(this);
+
+                break;
+            case R.id.textViewChange:
+                // galleryIntent();
+                CropImage.activity(null).setGuidelines(CropImageView.Guidelines.ON).start(this);
+
+                break;
+
+        }
+    }
+
+
+    private void galleryIntent() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                startGalleryIntent();
+            } else {
+                requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST);
+            }
+        } else startGalleryIntent();
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        switch (requestCode) {
+            case PERMISSION_REQUEST: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    startGalleryIntent();
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(this, "Permission required for changing user image", Toast.LENGTH_SHORT).show();
+                }
+                return;
+            }
+        }
+    }
+
+    private void startGalleryIntent() {
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);//
+        startActivityForResult(Intent.createChooser(intent, "Select File"), SELECT_FILE);
+    }
+
+    @SuppressLint("ValidFragment")
+    public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener {
+        @Override
+        public Dialog onCreateDialog(Bundle savedInstanceState) {
+            Date selectedDate = null;
+            if (!showResults.isEmpty()) {
+                String start_dt = showResults;
+                DateFormat formatter = new SimpleDateFormat("dd MMM yyyy");
+                try {
+                    selectedDate = (Date) formatter.parse(start_dt);
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+            final Calendar c = Calendar.getInstance();
+            c.setTime(selectedDate);
+            int year = c.get(Calendar.YEAR);
+            int month = c.get(Calendar.MONTH);
+            int day = c.get(Calendar.DAY_OF_MONTH);
+            return new DatePickerDialog(getActivity(), this, year, month, day);
+        }
+
+        public void onDateSet(DatePicker view, int year, int month, int day) {
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(year, month, day);
+            Calendar minAdultAge = new GregorianCalendar();
+            minAdultAge.add(Calendar.YEAR, -13);
+            if (minAdultAge.before(calendar)) {
+                showAlertDialog(getString(R.string.sorry), getString(R.string.ageValidationAlert));
+            } else {
+                SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+                dateString = dateFormat.format(calendar.getTime());
+                //textViewDate.setText( String.valueOf(day)+" " + String.valueOf(month) +" "+String.valueOf(year));
+                if (!dateString.isEmpty() && !dateString.equals("")) {
+                    editTextBirthday.setText(dateString);
+                }
+            }
+
+        }
+
+
+    }
+
+    public void showAlertDialog(String title, String message) {
+        android.app.AlertDialog.Builder alertDialogBuilder = new android.app.AlertDialog.Builder(EditProfileActivity.this);
+        alertDialogBuilder.setTitle(title);
+        alertDialogBuilder.setCancelable(false);
+        alertDialogBuilder.setMessage(message).setCancelable(false).setPositiveButton(getString(R.string.ok), new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int id) {
+                dialog.cancel();
+            }
+        });
+        final android.app.AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+        alertDialog.getButton(android.app.AlertDialog.BUTTON_POSITIVE).setTextColor(getResources().getColor(R.color.colorPrimary));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = this.getMenuInflater();
+        inflater.inflate(R.menu.home, menu);
+        menu.findItem(R.id.action_right_icon).setVisible(false);
+        menu.findItem(R.id.action_right_Text).setVisible(true);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_right_Text:
+
+                validation();
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private boolean isValidMail(String email) {
+        boolean check;
+        Pattern p;
+        Matcher m;
+        String EMAIL_STRING = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        p = Pattern.compile(EMAIL_STRING);
+
+        m = p.matcher(email);
+        check = m.matches();
+
+        /*if(!check) {
+            txtEmail.setError("Not Valid Email");
+        }*/
+        return check;
+    }
+
+    private void validation() {
+        try {
+            String firstName = editTextFirstName.getText().toString().trim();
+            String lastName = editTextLastName.getText().toString().trim();
+            String email = editTextEmail.getText().toString().trim();
+            String textBirthday = editTextBirthday.getText().toString().trim();
+            Date dob = new Date(textBirthday);
+            username = Preferences.get(EditProfileActivity.this, Preferences.USERNAME);
+            if (firstName.isEmpty()) {
+                editTextFirstName.setError(getString(R.string.firstNameShouldNotBeEmpty));
+            } else if (lastName.isEmpty()) {
+                editTextLastName.setError(getString(R.string.lastNameShouldNotBeEmpty));
+            } else if (email.isEmpty()) {
+                editTextEmail.setError(getString(R.string.lastNameShouldNotBeEmpty));
+            } else if (!isValidMail(email) || email.contains("-")) {
+                editTextEmail.setError(getString(R.string.pleaseEnterValidEmail));
+            } else if (textBirthday.isEmpty()) {
+                editTextBirthday.setError(getString(R.string.pleaseAddYourDOB));
+            } else {
+                long date = dob.getTime();
+                Log.d("datess", String.valueOf(date));
+                if (Utils.isNetworkConnected(EditProfileActivity.this)) {
+                    if (mUsers != null && !firstName.equals("")) {
+                        mUsers.setFirstname(firstName);
+
+                    }
+                    if (mUsers != null && !lastName.equals("")) {
+                        mUsers.setLastname(lastName);
+                    }
+                    if (mUsers != null && !email.equals("")) {
+                        mUsers.setEmail(email);
+                    }
+                    if (mUsers != null && bitmap != null && username != null) {
+                        mUsers.setProfile_picture_url(com.swap.utilities.Constants.PROFILE_PICTURE + username + "/profile_picture-" + filename);
+                    }
+                    if (mUsers != null) {
+                        mUsers.setBirthday(date);
+                    }
+                    if (mUsers != null && MoreInfoActivity.middleName != null) {
+                        mUsers.setMiddlename(MoreInfoActivity.middleName);
+                    }
+                    if (mUsers != null && MoreInfoActivity.company != null) {
+                        mUsers.setCompany(MoreInfoActivity.company);
+                    }
+                    if (mUsers != null && MoreInfoActivity.website != null) {
+                        mUsers.setWebsite(MoreInfoActivity.website);
+                    }
+                    new UserProfilePicUpdate().execute();
+                } else {
+                    Toast.makeText(getApplicationContext(), R.string.pleaseCheckInternetConnection, Toast.LENGTH_SHORT);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    // Update attributes
+    private void updateAttribute(String attributeType, String attributeValue) {
+
+        if (attributeType == null || attributeType.length() < 1) {
+            return;
+        }
+        CognitoUserAttributes updatedUserAttributes = new CognitoUserAttributes();
+        updatedUserAttributes.addAttribute(attributeType, attributeValue);
+        //Toast.makeText(getApplicationContext(), attributeType + ": " + attributeValue, Toast.LENGTH_LONG);
+        //showWaitDialog("Updating...");
+        AppHelper.getPool().getUser(username).updateAttributesInBackground(updatedUserAttributes, updateHandler);
+    }
+
+    UpdateAttributesHandler updateHandler = new UpdateAttributesHandler() {
+        @Override
+        public void onSuccess(List<CognitoUserCodeDeliveryDetails> attributesVerificationList) {
+            // Update successful
+            if (attributesVerificationList.size() > 0) {
+                Log.d("Updated", "Updated");
+                // showDialogMessage("Updated", "The updated attributes has to be verified",  false);
+            }
+            getDetails();
+        }
+
+        @Override
+        public void onFailure(Exception exception) {
+            // Update failed
+            closeWaitDialog();
+            Log.d("Updated", "noUpdated");
+            // showDialogMessage("Update failed", AppHelper.formatException(exception), false);
+        }
+    };
+
+    private class GetUserInfoUpdateTask extends AsyncTask<Void, Void, Users> {
+
+        boolean isUpdate;
+
+        public GetUserInfoUpdateTask(boolean isUpdate) {
+            this.isUpdate = isUpdate;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //if (!isUpdate) {
+            //showWaitDialog("Loading...");
+            //}
+        }
+
+        protected Users doInBackground(Void... params) {
+            if (isUpdate) {
+
+                SwapUser.updateUsers(EditProfileActivity.this, mUsers);
+            } /*else {
+                return SwapUser.getUser(EditProfileActivity.this, Preferences.get(EditProfileActivity.this, Preferences.USERNAME));
+            }*/
+            return null;
+
+        }
+
+        protected void onPostExecute(Users user) {
+
+            if (mUsers != null) {
+                Utils.saveUserDateInPreferences(EditProfileActivity.this, mUsers, Preferences.UserDate);
+                //updateAttribute(AppHelper.getSignUpFieldsC2O().get("Email"), mUsers.getEmail());
+                // updateAttribute(AppHelper.getSignUpFieldsC2O().get("Picture"), mUsers.getProfile_picture_url());
+                String pictureUrl = com.swap.utilities.Constants.PROFILE_PICTURE + username + "/profile_picture-" + filename;
+                UpdateAttributes.updateAttribute(EditProfileActivity.this, AppHelper.getSignUpFieldsC2O().get("Picture"), pictureUrl);
+                UpdateAttributes.updateAttribute(EditProfileActivity.this, AppHelper.getSignUpFieldsC2O().get("Email"), mUsers.getEmail());
+
+            }
+            if (!isUpdate) {
+                mUsers = user;
+                setUserData(user);
+                Log.d("result :", String.valueOf(user));
+            }
+            if (Utils.realPath == null || Utils.realPath.isEmpty()) {
+                closeWaitDialog();
+                finish();
+            }
+        }
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        bitmap = null;
+        if (resultCode == Activity.RESULT_OK) {
+            if (requestCode == SELECT_FILE) {
+                if (data != null) {
+                    bitmap = Utils.onSelectFromGalleryResult(this, data);
+                }
+            }
+            if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                CropImage.ActivityResult result = CropImage.getActivityResult(data);
+                if (resultCode == RESULT_OK) {
+
+                    bitmap = Utils.onCaptureImageResult(this, result.getUri());
+                    //((ImageView) findViewById(R.id.quick_start_cropped_image)).setImageURI(result.getUri());
+                    Log.d("Cropping successful: ", String.valueOf(result.getSampleSize()));
+                } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                    Log.d("Cropping failed: ", String.valueOf(result.getError()));
+                    // Toast.makeText(this, "Cropping failed: " + result.getError(), Toast.LENGTH_LONG).show();
+                }
+            }
+        }
+
+        if (bitmap != null) {
+            imageViewEditProfileImage.setImageBitmap(bitmap);
+        }
+    }
+
+    //File uploadToS3 = new File("/storage/emulated/0/DCIM/1500470520856.jpg");
+    File uploadToS3;
+
+    private void uploadFileToS3(String uri) {
+        if (uri != null) {
+            uploadToS3 = new File(uri);
+            filename = uri.substring(uri.lastIndexOf("/") + 1).replace("_", "");
+       /* TransferObserver transferObserver = transferUtility.upload(
+                com.swap.utilities.Constants.BUCKET_NAME,     *//* The bucket to upload to *//*
+                "Image.jpg",    *//* The key for the uploaded object *//*
+                uploadToS3       *//* The file where the data to upload exists *//*
+        );*/
+            TransferObserver transferObserver = transferUtility.upload(
+                    com.swap.utilities.Constants.BUCKET_NAME,
+                    username + "/profile_picture-" + filename,
+                    uploadToS3
+            );
+            transferObserverListener(transferObserver);
+        }
+    }
+
+    public void transferObserverListener(TransferObserver transferObserver) {
+
+        transferObserver.setTransferListener(new TransferListener() {
+
+            @Override
+            public void onStateChanged(int id, TransferState state) {
+                /*Toast.makeText(getApplicationContext(), "State Change"
+                        + state, Toast.LENGTH_SHORT).show();*/
+                Log.d("State Change", String.valueOf(state));
+                if (state.equals(TransferState.COMPLETED)) {
+                    // SwapUser.updateUsers(EditProfileActivity.this, mUsers);
+                    closeWaitDialog();
+                    Utils.realPath = "";
+                    finish();
+                }
+                if (state.equals(TransferState.FAILED)) {
+                    updatedImageURI = "";
+                    closeWaitDialog();
+                    Utils.realPath = "";
+                    finish();
+                }
+
+            }
+
+            @Override
+            public void onProgressChanged(int id, long bytesCurrent, long bytesTotal) {
+                try {
+                    int percentage = (int) (bytesCurrent / bytesTotal * 100);
+                    Log.d("Progress in %", String.valueOf(percentage));
+
+                } catch (ArithmeticException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onError(int id, Exception ex) {
+                Log.e("error", "error");
+            }
+
+        });
+    }
+
+
+    private void setUserData(Users result) {
+        if (result != null) {
+            if (result.getFirstname() != null)
+                editTextFirstName.setText(result.getFirstname());
+            if (result.getLastname() != null)
+                editTextLastName.setText(result.getLastname());
+            if (result.getEmail() != null)
+                editTextEmail.setText(result.getEmail());
+            if (result.getMiddlename() != null)
+                MoreInfoActivity.middleName = result.getMiddlename();
+            if (result.getCompany() != null)
+                MoreInfoActivity.company = result.getCompany();
+            if (result.getWebsite() != null)
+                MoreInfoActivity.website = result.getWebsite();
+
+
+            Date getBirthday = new Date(result.getBirthday());
+            Date interval = new Date(01 - 01 - 1970);
+            long realBirthday = Utils.getDateInterval(interval, getBirthday);
+            Date d = new Date(realBirthday);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd MMM yyyy");
+            dateResult = dateFormat.format(d);
+            editTextBirthday.setText(dateResult);
+            if (!editTextBirthday.getText().toString().isEmpty()) {
+                showResults = editTextBirthday.getText().toString();
+            }
+            existingProfilePic = result.getProfile_picture_url();
+            // Picasso.with(context).load("http://i.imgur.com/DvpvklR.png").into(imageViewEditProfileImage);
+            Picasso.with(this).load(result.getProfile_picture_url()).error(R.drawable.profile_picture_default_icon).into(imageViewEditProfileImage);
+        }
+    }
+
+
+    private void showWaitDialog(String message) {
+        closeWaitDialog();
+        waitDialog = new ProgressDialog(this);
+        waitDialog.setTitle(message);
+        waitDialog.show();
+    }
+
+    private void closeWaitDialog() {
+        if (waitDialog != null && waitDialog.isShowing()) {
+            waitDialog.dismiss();
+        }
+    }
+
+
+    private class UserProfilePicUpdate extends AsyncTask<Void, Void, Users> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            //if (!isUpdate) {
+            showWaitDialog("Loading");
+            //}
+        }
+
+        protected Users doInBackground(Void... params) {
+
+            if (Utils.realPath != null) {
+                uploadFileToS3(Utils.realPath);
+            }
+            return null;
+
+        }
+
+        protected void onPostExecute(Users user) {
+            //closeWaitDialog();
+            if (mUsers != null && bitmap != null && !filename.isEmpty()) {
+                String pictureUrl = com.swap.utilities.Constants.PROFILE_PICTURE + username + "/profile_picture-" + filename;
+                Log.d("pictureUrl: ", pictureUrl);
+                //updateAttribute(AppHelper.getSignUpFieldsC2O().get("Picture"), pictureUrl);
+                mUsers.setProfile_picture_url(pictureUrl);
+            }
+            new GetUserInfoUpdateTask(true).execute();
+
+        }
+    }
+}

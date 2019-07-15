@@ -1,0 +1,15 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:tools="http://schemas.android.com/tools"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:background="@color/colorWhite"
+             tools:context="com.swap.views.fragments.SwapTutorialPageTenFragment">
+
+    <ImageView
+        android:id="@+id/imageViewUseTheApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/tutorial_ten"/>
+
+</FrameLayout>

@@ -1,0 +1,166 @@
+package com.swap.utilities;
+
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.util.Log;
+
+import com.swap.views.activities.LoginActivity;
+
+/**
+ * Created by anjali on 05-07-2017.
+ */
+
+public class Preferences {
+    public static final String APP_PREF = "swap";
+    public static final String INSTAGRAM_ACCESS_TOKEN = "instagramAccessToken";
+    public static final String SPOTIFY_ACCESS_TOKEN = "spotifyAccessToken";
+    public static final String SPOTIFY_REFRESH_TOKEN = "spotifyRefreshToken";
+    public static final String SPOTIFY_EXPIRES_IN_DURATION = "spotifyExpiresInDuration";
+    public static final String SPOTIFY_ACCESS_TOKEN_TIME = "spotifyAccessTokenTime";
+    public static final String SOUND_CLOUD_ACCESS_TOKEN = "soundCloudAccessToken";
+    public static final String YOUTUBE_ACCESS_TOKEN = "youtubeAccessToken";
+    public static final String INSTAGRAM_PROFILE_PICTURE = "instagramProfilePic" ;
+    public static final String SOUND_CLOUD_PROFILE_PICTURE = "soundCloudProfilePic" ;
+    public static final String TWITTER_PROFILE_PICTURE = "twitterProfilePic";
+    public static final String SPOTIFY_PROFILE_PICTURE = "spotifiyProfilePic";
+    public static final String GITHUB_PROFILE_PICTURE = "githubProfilePic";
+    public static String REDDIT_ACCESS_TOKEN = "redditAccessToken";
+    public static final String YOUTUBE_ACCOUNT_NAME = "youtubeAccountName";
+    public static final String VIMEO_ACCESS_TOKEN = "vimeoAccessToken";
+    public static final String GITHUB_ACCESS_TOKEN = "gitAccessToken";
+    public static final String REDDIT_ACCOUNT_NAME = "redditAccountName";
+    public static final String REDDIT_CODE = "redditCode";
+    public static final String PINTEREST_ACCESS_TOKEN = "pinterestAccessToken";
+
+    public static SharedPreferences sp;
+    public static String KEY_ID = "id";
+    public static String VERIFIED = "hasVerified";
+    public static String twitter = "twitter";
+    public static String instagram = "instagram";
+    public static String UserDate = "userDate";
+    public static String USER_SWAPS = "userSwap";
+    public static final String IsLoginOrSignup = "isLoginOrSignup";
+    public static final String IsConnectSocialMedia = "isConnectSocialMedia";
+    public static final String USERNAME = "userName";
+    public static String IsConnectSocialMediaFromSplash = "IsConnectSocialMediaFromSplash";
+
+    public static final String IS_REDDIT_LOGIN = "isRedditLogin";
+    public static final String IS_YOUTUBE_LOGIN = "isYoutubeLogin";
+    public static final String IS_GITHUB_LOGIN = "isGithubLogin";
+    public static final String IS_SPOTIFY_LOGIN = "isSpotifyLogin";
+    public static final String IS_VIMEO_LOGIN = "isVimeoLogin";
+    public static final String IS_PINTEREST_LOGIN = "isPinterestLogin";
+    public static final String IS_SOUND_CLOUD_LOGIN = "isSoundCloudLogin";
+    public static final String IS_INSTAGRAM_LOGIN = "isInstagramLogin";
+    public static final String IS_TWITTER_LOGIN = "isTwitterLogin";
+
+
+    public static void save(Context context, String key, String value) {
+        if (context != null) {
+            sp = context.getSharedPreferences(APP_PREF, 0);
+            SharedPreferences.Editor edit = sp.edit();
+            edit.putString(key, value);
+            edit.commit();
+        }
+    }
+
+    public static String get(Context context, String key) {
+        String userId = "";
+        if (context != null) {
+            sp = context.getSharedPreferences(APP_PREF, 0);
+            userId = sp.getString(key, "");
+        }
+        return userId;
+    }
+
+    public static void saveInt(Context context, String key, int value) {
+        if(context!=null) {
+            sp = context.getSharedPreferences(APP_PREF, 0);
+            SharedPreferences.Editor edit = sp.edit();
+            edit.putInt(key, value);
+            edit.commit();
+        }
+    }
+
+    public static int getInt(Context context, String key) {
+        int userId = 0;
+        if (context != null) {
+            sp = context.getSharedPreferences(APP_PREF, 0);
+            userId = sp.getInt(key, 0);
+        }
+        return userId;
+    }
+
+    public static void saveLong(Context context, String key, long value) {
+        if(context!=null) {
+            sp = context.getSharedPreferences(APP_PREF, 0);
+            SharedPreferences.Editor edit = sp.edit();
+            edit.putLong(key, value);
+            edit.commit();
+        }
+    }
+
+    public static long getLong(Context context, String key) {
+        long userId = 0;
+        if (context != null) {
+            sp = context.getSharedPreferences(APP_PREF, 0);
+            userId = sp.getLong(key, 0);
+        }
+        return userId;
+    }
+
+    public static void clearPreference(Context context) {
+        sp = context.getSharedPreferences(APP_PREF, 0);
+        SharedPreferences.Editor edit = sp.edit();
+        edit.clear();
+        edit.commit();
+    }
+
+    public static void saveBooleanValue(Context context, String key, boolean value) {
+        if (context != null) {
+            sp = context.getSharedPreferences(APP_PREF, 0);
+            SharedPreferences.Editor edit = sp.edit();
+            edit.putBoolean(key, value);
+            edit.commit();
+        }
+    }
+
+    public static boolean getBooleanValue(Context context, String key) {
+        boolean userId = false;
+        if (context != null) {
+            sp = context.getSharedPreferences(APP_PREF, 0);
+            userId = sp.getBoolean(key, false);
+        }
+        return userId;
+    }
+
+    public static void logOut(Activity context) {
+        //youtube//
+        SocialMediaUtil.mCredential = SocialMediaUtil.youtubeInitialization(context);
+        if (SocialMediaUtil.mCredential.getSelectedAccountName() != null && !SocialMediaUtil.mCredential.getSelectedAccountName().isEmpty()) {
+            Log.d("youtube user", SocialMediaUtil.mCredential.getSelectedAccountName());
+            SocialMediaUtil.mCredential.setSelectedAccount(null);
+        }
+        //Pinterest//
+        SocialMediaUtil.pdkClient = SocialMediaUtil.pinterestInitialization(context);
+        if (SocialMediaUtil.pdkClient.getAccessToken() != null) {
+            SocialMediaUtil.pdkClient.getInstance().logout();
+        }
+        //Instagram//
+        SocialMediaUtil.mApp = SocialMediaUtil.instagramInitialization(context);
+        if (SocialMediaUtil.mApp.getTOken()!=null){
+            SocialMediaUtil.mApp.resetAccessToken();
+        }
+        //For other social media's//
+        Utils.clearWebViewCookies(context);
+
+        clearPreference(context);
+        Preferences.save(context.getApplicationContext(), Preferences.VERIFIED, "0");
+        Intent intent = new Intent(context, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        context.startActivity(intent);
+        ((Activity) context).finishAffinity();
+    }
+}
